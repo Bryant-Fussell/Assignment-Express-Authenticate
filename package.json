@@ -1,0 +1,20 @@
+{
+    "name": "Express-Authenticate",
+    "version": "1.0.0",
+    "description": " ",
+    "main": "Authentication.js",
+    "repository": "https://github.com/Bryant-Fussell/Assignment-Express-Authenticate",
+    "author": "Bryant Fussell",
+    "license": "MIT",
+    "private": false,
+    "scripts": {
+        "start": "node Authentication.js"
+    },
+    "dependencies": {
+        "express": "^4.19.0",
+        "mongodb": "^5.9.2"
+    },
+    "engines": {
+        "node": ">=14"
+    }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authentication</title>
+<style>
+  #Body {
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #LoginForm {
+    display: block;
+    margin-bottom: 80px;
+  } 
+  #RegisterForm {
+    display: none;
+  }
+  #Label {
+    font-size: xx-large;
+    margin-bottom: 80px;
+  }
+  #Box1 {
+    margin: 20px;
+    padding: 20px; 
+    border: 2px solid black; 
+    border-radius: 10px;
+    width: 300px;
+  }
+  #Box2 {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid black; 
+    border-radius: 10px; 
+    width: 300px; 
+  }
+  #Box3 {
+    margin: 20px;
+    padding: 20px; 
+    border: 2px solid black; 
+    border-radius: 10px;
+    width: 300px;
+  }
+  #Box4 {
+    margin: 20px;
+    padding: 20px; 
+    border: 2px solid black; 
+    border-radius: 10px;
+    width: 300px;
+  }
+  #Button1 {
+    width: max-content;
+  }
+</style>
+</head>
+<body id="Body">
+  <div id="LoginForm">
+  <h1>Login</h1>
+<form id="loginreal">
+  <div id="Box1">
+  <label id="Label" for="username">Username:</label><br><br>
+  <input type="text" id="username" name="username" placeholder="Username"><br><br>
+  </div>
+  <div id="Box2">
+  <label id="Label" for="password">Password:</label><br><br>
+  <input type="password" id="password" name="password" placeholder="Password"><br><br>
+  </div>
+  <input id="Button1" type="submit" value="Login"><br><br>
+</form>
+  <button onclick="toggleForm()">Make Account</button>
+  </div>
+  <div id="RegisterForm">
+  <h1>Register</h1>
+<form action="#" method="post">
+  <div id="Box3">
+  <label id="Label" for="newUsername">Username:</label><br><br>
+  <input type="text" id="newUsername" name="newUsername" placeholder="Username"><br><br>
+  </div>
+  <div id="Box4">
+  <label id="Label" for="newPassword">Password:</label><br><br>
+  <input type="password" id="newPassword" name="newPassword" placeholder="Password"><br><br>
+  </div>
+  <input type="submit" value="Register">
+</form>
+  <button onclick="toggleForm()">Go to Login</button>
+  </div>
+  <div id="message"></div>
+<script>
+  function toggleForm() {
+   var loginForm = document.getElementById("LoginForm");
+   var registerForm = document.getElementById("RegisterForm");
+   if (loginForm.style.display === "none") {
+   loginForm.style.display = "block";
+   registerForm.style.display = "none";
+   } else {
+   loginForm.style.display = "none";
+   registerForm.style.display = "block";
+   }
+  }
+
+
+  const form = document.getElementById('loginreal');
+    const messageDiv = document.getElementById('message');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const username = form.elements.username.value;
+      const password = form.elements.password.value;
+
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await response.text();
+      messageDiv.textContent = data;
+    });
+</script>
+</body>
+</html>
