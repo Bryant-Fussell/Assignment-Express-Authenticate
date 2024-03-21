@@ -6,6 +6,8 @@ var fs = require("fs");
 const { MongoClient } = require("mongodb");
 const uri = "mongodb+srv://Usernew:KhvAOKrTpSFCxWge@cluster0.atsm2tk.mongodb.net/?retryWrites=true&w=majority";
 
+
+
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
 
@@ -20,7 +22,6 @@ app.get('/', function(req, res, next){
 
 
 
-
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -29,8 +30,8 @@ app.post('/login', async (req, res) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-
-    const db = client.db();
+  
+    const db = client.db("MyDBexample");
     const user = await db.collection('Users').findOne({ username, password });
     console.log('user:', user);
 
