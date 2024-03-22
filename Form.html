@@ -54,6 +54,10 @@
   #Button1 {
     width: max-content;
   }
+  #LoginStatus {
+  align-items: center;
+  margin: 50px;
+  }
 </style>
 </head>
 <body id="Body">
@@ -85,9 +89,8 @@
   </div>
   <input type="submit" value="Register">
 </form>
-  <button onclick="toggleForm()">Go to Login</button>
   </div>
-  <div id="message"></div>
+  <div id="LoginStatus"></div>
 <script>
   function toggleForm() {
    var loginForm = document.getElementById("LoginForm");
@@ -103,7 +106,7 @@
 
 
   const form = document.getElementById('loginreal');
-    const messageDiv = document.getElementById('message');
+  const LoginStatus = document.getElementById('LoginStatus');
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -118,9 +121,14 @@
         },
         body: JSON.stringify({ username, password })
       });
-
+      
       const data = await response.text();
-      messageDiv.textContent = data;
+      if(data.match("Ready To Roll")){
+      LoginStatus.textContent = "Wait!";
+      window.location.href = '/result';
+      } else{
+      LoginStatus.textContent = data;
+     }
     });
 </script>
 </body>

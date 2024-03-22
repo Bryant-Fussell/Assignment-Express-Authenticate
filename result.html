@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+</head>
+<body>
+    <h1>Result Page</h1>
+    <div id="cookieValue"></div>
+    <div id="timeLeft"></div>
+
+    <script>
+        // Function to retrieve and display the cookie value
+        function displayCookieValue() {
+            // Get the value of the 'myCookie' cookie
+            var cookieValue = document.cookie.replace("/(?:(?:^|.*;\s*)myCookie\s*=\s*([^;]*).*$)|^.*$/", "$1");
+            
+            // Display the value in the 'cookieValue' div
+            var cookieValueDiv = document.getElementById("cookieValue");
+            cookieValueDiv.innerHTML = "<p><strong>Cookie Value:</strong> " + cookieValue + "</p>";
+
+            // Calculate the time left on the cookie
+            var cookieExpiry = new Date(document.cookie.replace("/(?:(?:^|.*;\s*)myCookieExpires\s*=\s*([^;]*).*$)|^.*$/", "$1"));
+            var currentTime = new Date();
+            var timeLeft = (cookieExpiry - currentTime) / 1000; // Convert milliseconds to seconds
+
+            // Display the time left in the 'timeLeft' div
+            var timeLeftDiv = document.getElementById("timeLeft");
+            timeLeftDiv.innerHTML = "<p><strong>Time Left:</strong> " + timeLeft + " seconds</p>";
+        }
+
+        // Call the function when the page loads
+        window.onload = displayCookieValue;
+    </script>
+</body>
+</html>
