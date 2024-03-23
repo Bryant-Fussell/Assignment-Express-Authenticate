@@ -78,7 +78,7 @@
   </div>
   <div id="RegisterForm">
   <h1>Register</h1>
-<form action="#" method="post">
+<form id="rform">
   <div id="Box3">
   <label id="Label" for="newUsername">Username:</label><br><br>
   <input type="text" id="newUsername" name="newUsername" placeholder="Username"><br><br>
@@ -91,6 +91,7 @@
 </form>
   </div>
   <div id="LoginStatus"></div>
+  <div id="RStatus"></div>
 <script>
   function toggleForm() {
    var loginForm = document.getElementById("LoginForm");
@@ -106,7 +107,9 @@
 
 
   const form = document.getElementById('loginreal');
-  const LoginStatus = document.getElementById('LoginStatus');
+  const LoginStatus = document.getElementById('LoginStatus'); 
+  const Rform = document.getElementById('rform');
+  const RStatus = document.getElementById('RStatus');
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -128,6 +131,27 @@
       window.location.href = '/result';
       } else{
       LoginStatus.textContent = data;
+     }
+    });
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const newUsername = rform.elements.newUsername.value;
+      const newPassword = rform.elements.newPassword.value;
+
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newUsername, newPassword })
+      });
+      
+      const data = await response.text();
+      if(data.match("Ready To Roll")){
+      location.reload();
+      } else{
+      RStatus.textContent = data;
      }
     });
 </script>

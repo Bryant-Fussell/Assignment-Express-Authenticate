@@ -24,6 +24,46 @@ app.get('/', function(req, res, next){
 });
 
 
+
+
+app.post('/register', async (req, res, ) => {
+const dataToInsert = { newUsername, newPassword } = req.body;
+ try {
+  const client = await MongoClient.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+ });
+
+ 
+   
+      
+
+        const database = client.db("MyDBexample");
+        const collection = database.collection("Users");
+
+        // Insert one document into the collection
+        const result = await collection.insertOne(dataToInsert);
+        console.log(`Inserted ${result.insertedCount} document into the collection`);
+    } catch (error) {
+        console.error("Error adding data to collection:", error);
+    } finally {
+        await client.close();
+        //console.log("Disconnected from MongoDB");
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 app.post('/login', async (req, res, next ) => {
  const { username, password } = req.body;
  try {
